@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/35adb1d615.js" crossorigin="anonymous"></script>
+    <script src="index.js" defer></script>
+</head>
+
+<body>
+    <section id="landing">
+        <nav>
+            <div class="nav__container">
+              <a class="logo__name" href="#landing">
+                <img src="./Assets/M Logo.png" alt="" class="logo">
+                <h3 class="company__name--logo">ovify</h3> 
+              </a>
+                <ul class="nav__links">
+                    <li><a href="" class="nav__link">Home</a></li>
+                    <li><a href="" class="nav__link">Popular List</a></li>
+                    <li><a href="" class="nav__link">Favorites</a></li>
+                    <li><button href="" class="nav__link nav__link--sign-up">Sign Up</button></li>
+                    <li><button href="" class="nav__link nav__link--log-in">Log In</button></li>
+                </ul>
+                <button class="btn__menu" onclick="openMenu()">
+                  <i class="fa-solid fa-bars"></i>
+                  </button>
+                  <div class="menu__backdrop">
+                    <button class="btn__menu btn__menu--close" onclick="closeMenu()">
+                      <i class="fa-solid fa-x"></i>
+                    </button>
+                    <ul class="menu__links">
+                      <li class="menu__list">
+                        <a href="#" class="menu__link" onclick="closeMenu()">Home</a>
+                      </li>
+                      <li class="menu__list">
+                        <a href="#" class="menu__link" onclick="closeMenu()">Popular List</a>
+                      </li>
+                      <li class="menu__list">
+                        <a href="#features" class="menu__link" onclick="closeMenu()">Favorites</a>
+                      </li>
+                      <li class="menu__list">
+                        <a class="menu__link no-cursor nav__link--sign-up" onclick="closeMenu()">Sign Up</a>
+                      </li>
+                      <li class="menu__list">
+                        <a class="menu__link no-cursor nav__link--log-in" onclick="closeMenu()">Log In</a>
+                      </li>
+                    </ul>
+                  </div>
+            </div>
+        </nav>
+        <header>
+            <div class="header__container">
+                <div class="header__description">
+                    <h1 class="title">Welcome to the Best Movie and TV Show Platform</h1>
+                    <figure class="middle__img-wrapper">
+                      <img class="popcorn__img" src="./Assets/undraw_home_cinema_l7yl.svg" alt="">
+                      <img src="./Assets/undraw_horror_movie_3988.svg" alt="" class="party__img">
+                    </figure>
+                </div>
+                <form class="search-form">
+                  <input type="text" class="search-input" placeholder="Search for Movies!">
+                  <a href="" class="search__function">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </a>
+                </form>
+              </div>
+        </header>
+    </section>
+
+    <main id="movies__main">
+      <section>
+        <div class="container">
+          <div class="row">
+            <div class="movies__header">
+              <h1 class="movies__header--title">
+                Results:
+              </h1>
+              <select id="filter" onchange="filterMovies(event)">
+                <option class="sort__text" value="" disabled selected>Sort</option>
+                <option class="sort__text" value="OLDEST" >Oldest</option>
+                <option class="sort__text" value="NEWEST" >Newest</option>
+              </select>
+            </div>
+            <div class="movies movies__loading">
+              <i class="fa-regular fa-spinner-third fa-spin" style="color: #b41313;"></i>
+            </div>
+            <div class="movies">
+              
+        </div>
+      </section>
+    </main>
+</body>
+</html>
