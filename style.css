@@ -30,7 +30,7 @@ li {
 }
 
 section {
-    padding: 0 72px;
+    padding: 0 48px;
 }
 
 button {
@@ -38,11 +38,15 @@ button {
 }
   
 button:active {
-    transform: translate(.5px, .5px);
+    transform: translate(1px, 1px);
 }
 
 .row {
     padding: 0, 48px;
+}
+
+nav {
+    width: 100%;
 }
   
 
@@ -75,12 +79,13 @@ button:active {
 .nav__container {
     display: flex;
     justify-content: space-between;
-    width: 100%;    
+    width: 100%;
 }
 
 .nav__links {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .nav__link {
@@ -105,6 +110,7 @@ button:active {
 
 .nav__link--sign-up, 
 .nav__link--log-in {
+    margin: 8px;
     font-weight: 500;
     border-radius: 24px;
     font-size: 20px;
@@ -119,8 +125,8 @@ button:active {
 }
 
 .btn__menu {
-    font-size: 40px;
-    padding: 8px;
+    font-size: 36px;
+    margin: 8px;
     border: none;
     display: none;
 }
@@ -206,6 +212,7 @@ button:active {
 }
 
 .search-form {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -214,7 +221,6 @@ button:active {
   }
 
 .search-input {
-    position: relative;
     margin: auto 0;
     width: 75%;
     max-width: 500px;
@@ -230,24 +236,33 @@ button:active {
 }
 
 .search__icon {
+    position: static;
     outline: none;
     border: none;
-}
-
-.fa-magnifying-glass {
-    position: absolute;
     color: rgb(190, 16, 16);
-    margin: -8px 12px 12px 24px;
-    font-size: 20px;
+    margin: 8px 12px 12px 24px;
+    font-size: 32px;
 }
 
-.fa-magnifying-glass:hover {
+.search__icon:hover {
     color: rgb(158, 12, 12);
 }
 
-.fa-magnifying-glass:active {
+.search__icon:active {
     transform: translate(1px, 1px);
 }
+
+.movies__loading {
+    position: static;
+    margin: 8px;
+    display: none;
+}
+
+.loading-spinner {
+    color: rgb(158, 12, 12);
+    font-size: 32px;
+}
+
 
 /* 
 
@@ -359,9 +374,6 @@ MEDIA SIZING
     .middle__img-wrapper {
         display: none;
     }
-    .search-input {
-        width: 100%;
-    }
 }
 
 @media (max-width:500px) {
@@ -371,5 +383,9 @@ MEDIA SIZING
     }
     .movie__img {
         max-width: 250px;
+    }
+    .search-form {
+        display: flex;
+        justify-content: space-around;
     }
 }
