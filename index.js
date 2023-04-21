@@ -31,12 +31,13 @@ async function sortMovies(filter) {
   }
 
   if (filter === 'OLDEST') {
-    moviesData.Search.sort((a, b) => a.Year - b.Year);
+    moviesData.Search.sort((a, b) => parseInt(a.Year.substring(0, 4)) - parseInt(b.Year.substring(0, 4)));
     moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
   } else if (filter === 'NEWEST') {
-    moviesData.Search.sort((a, b) => b.Year - a.Year);
+    moviesData.Search.sort((a, b) => parseInt(b.Year.substring(0, 4)) - parseInt(a.Year.substring(0, 4)));
     moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
-  } else if (filter === 'DEFAULT') {
+  }
+    else if (filter === 'DEFAULT') {
     moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
   }
 }
