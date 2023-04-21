@@ -368,6 +368,9 @@ MEDIA SIZING
     .party__img {
         max-width: 250px;
     }
+    .search__icon {
+        margin: 8px 12px 12px 12px;
+    }
 } 
 
 @media (max-width: 600px) {
