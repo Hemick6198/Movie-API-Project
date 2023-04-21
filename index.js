@@ -2,16 +2,20 @@
 const API_KEY = '23587054';
 let moviesListEl = document.querySelector('.movies');
 let moviesData = {};
+let movies;
+let movies__loading = document.querySelector('.movies__loading')
 let searchIcon = document.querySelector('.search__icon');
+let spinnerEl = document.querySelector('.loading-spinner')
+
+spinnerEl.style.display = 'none';
 
 // Search API function
 async function searchMovies(searchTerm) {
-  const showSpinner = document.querySelector(`.movies__loading`)
   const movies = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchTerm}`);
   moviesData = await movies.json();
-  showSpinner.classList += ' loading-spinner'
+  spinnerEl.style.display = 'block';
   await timeout(1000);
-  showSpinner.classList.remove('loading-spinner')
+  spinnerEl.remove();
   moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
 }
 
@@ -20,12 +24,10 @@ async function sortMovies(filter) {
   if(!moviesData) {
           moviesData = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchTerm}`);
       }
-
   if(filter === 'OLDEST') {
         moviesData.Search.sort((a, b) => a.Year - b.Year);
         moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
       }
-
     else if(filter === 'NEWEST') {
         moviesData.Search.sort((a, b) => b.Year - a.Year);
         moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');

@@ -254,21 +254,21 @@ nav {
 
 .movies__loading {
     position: static;
-    margin: 8px;
-    display: none;
+    margin: 16px;
+    padding: 16px;
+    /* display: none; */
 }
 
 .loading-spinner {
     color: rgb(158, 12, 12);
-    font-size: 32px;
+    font-size: 60px;
+    display: none;
 }
 
 
 /* 
 
-
 MOVIES
-
 
 */
 
