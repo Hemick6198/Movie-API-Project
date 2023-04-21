@@ -6,8 +6,9 @@ let movies;
 let movies__loading = document.querySelector('.movies__loading')
 let searchIcon = document.querySelector('.search__icon');
 let spinnerEl = document.querySelector('.loading-spinner')
-
+// display:none wasn't working in CSS
 spinnerEl.style.display = 'none';
+
 
 // Search API function
 async function searchMovies(searchTerm) {
