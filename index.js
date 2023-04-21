@@ -21,7 +21,6 @@ async function searchMovies(searchTerm) {
   await timeout(1000);
   spinnerEl.remove();
   moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
-  console.log(moviesListEl)
   document.getElementById('filter').selectedIndex = 0;
 }
 
