@@ -8,18 +8,15 @@
     line-height: 1.5;
     background-color: #242424;
     color: whitesmoke;
+    overflow-x: hidden;
 }
 
 html {
     scroll-behavior: smooth;
 }
 
-section {
-    margin: 0 72px;
-}
-
 a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: whitesmoke;
 }
 
@@ -32,12 +29,16 @@ li {
     list-style-type: none;
 }
 
+section {
+    padding: 0 72px;
+}
+
 button {
     cursor: pointer;
 }
   
 button:active {
-    transform: translateY(1px);
+    transform: translate(.5px, .5px);
 }
 
 .row {
@@ -68,6 +69,7 @@ button:active {
     color: rgb(190, 16, 16);
     font-size: 48px;
     margin-left: -16px;
+    text-decoration: none;
 }
 
 .nav__container {
@@ -178,6 +180,7 @@ button:active {
     text-align: center;
 }
 
+
 .middle__img-wrapper {
     display: flex;
     justify-content: center;
@@ -211,19 +214,30 @@ button:active {
   }
 
 .search-input {
+    position: relative;
     margin: auto 0;
     width: 75%;
     max-width: 500px;
-    border: 1px solid rgb(24, 24, 24);
-    border-radius: 999px;
+    border: 2px solid rgb(24, 24, 24);
+    border-radius: 9px;
     padding: 12px 24px;
     font-size: 18px;
 }
 
+.search-input:active {
+    border-color: rgb(24, 24, 24);
+    background-color: transparent;
+}
+
+.search__icon {
+    outline: none;
+    border: none;
+}
+
 .fa-magnifying-glass {
+    position: absolute;
     color: rgb(190, 16, 16);
-    position: relative;
-    left: -36px;
+    margin: -8px 12px 12px 24px;
     font-size: 20px;
 }
 
@@ -232,9 +246,8 @@ button:active {
 }
 
 .fa-magnifying-glass:active {
-    transform: translateY(1px);
+    transform: translate(1px, 1px);
 }
-
 
 /* 
 
@@ -255,7 +268,6 @@ MOVIES
     border: none;
     font-size: 16px;
     line-height: 1.5;
-    width: 20vw;
 }
 
 .movie__img--wrapper {
@@ -316,7 +328,7 @@ MEDIA SIZING
         font-size: 32px;
     }
     section {
-        margin: 0 14px;
+        padding: 0 14px;
     }
     .popcorn__img,
     .party__img {

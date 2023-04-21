@@ -62,10 +62,10 @@
                     </figure>
                 </div>
                 <form class="search-form">
-                  <input type="text" class="search-input" placeholder="Search for Movies!">
-                  <a href="" class="search__function">
+                  <input type="text" class="search-input" placeholder="Search for Movies!" onchange="main(event)">
+                  <button class="search__icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                  </a>
+                  </button>
                 </form>
               </div>
         </header>
@@ -79,7 +79,7 @@
               <h1 class="movies__header--title">
                 Results:
               </h1>
-              <select id="filter" onchange="filterMovies(event)">
+              <select id="filter" onchange="filter(event)">
                 <option class="sort__text" value="" disabled selected>Sort</option>
                 <option class="sort__text" value="OLDEST" >Oldest</option>
                 <option class="sort__text" value="NEWEST" >Newest</option>
