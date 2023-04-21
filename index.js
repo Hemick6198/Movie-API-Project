@@ -3,11 +3,14 @@ const API_KEY = '23587054';
 let moviesListEl = document.querySelector('.movies');
 let moviesData = {};
 let movies;
+let currentFilter = 'DEFAULT';
 let movies__loading = document.querySelector('.movies__loading')
 let searchIcon = document.querySelector('.search__icon');
 let spinnerEl = document.querySelector('.loading-spinner')
+
 // display:none wasn't working in CSS
 spinnerEl.style.display = 'none';
+
 
 
 // Search API function
@@ -18,21 +21,24 @@ async function searchMovies(searchTerm) {
   await timeout(1000);
   spinnerEl.remove();
   moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
+  document.getElementById('filter').selectedIndex = 0;
 }
 
-// Fetch movie data if not found then sort function
+// Filters by year and resets the drop-down to resort easily
 async function sortMovies(filter) {
-  if(!moviesData) {
-          moviesData = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchTerm}`);
-      }
-  if(filter === 'OLDEST') {
-        moviesData.Search.sort((a, b) => a.Year - b.Year);
-        moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
-      }
-    else if(filter === 'NEWEST') {
-        moviesData.Search.sort((a, b) => b.Year - a.Year);
-        moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
-      }
+  if (!moviesData) {
+    moviesData = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchTerm}`);
+  }
+
+  if (filter === 'OLDEST') {
+    moviesData.Search.sort((a, b) => a.Year - b.Year);
+    moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
+  } else if (filter === 'NEWEST') {
+    moviesData.Search.sort((a, b) => b.Year - a.Year);
+    moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
+  } else if (filter === 'DEFAULT') {
+    moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
+  }
 }
 
 // Add event listener to submit input
