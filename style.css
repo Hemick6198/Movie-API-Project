@@ -286,6 +286,9 @@ MOVIES
 }
 
 .movie__img--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     padding: 12px;
 }
@@ -371,6 +374,9 @@ MEDIA SIZING
     .search__icon {
         margin: 8px 12px 12px 12px;
     }
+    .movie__img {
+        max-width: 250px;
+    }
 } 
 
 @media (max-width: 600px) {
@@ -403,11 +409,11 @@ MEDIA SIZING
         line-height: 1;
         padding: 0;
     }
-    .movie__img {
-        max-width: 250px;
-    }
     .search-form {
         display: flex;
         justify-content: space-around;
+    }
+    .movie__img {
+        max-width: 200px;
     }
 }
