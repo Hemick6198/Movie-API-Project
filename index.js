@@ -1,79 +1,109 @@
 // http://www.omdbapi.com/?i=tt3896198&apikey=23587054
-const API_KEY = '23587054';
-let moviesListEl = document.querySelector('.movies');
+const API_KEY = "23587054";
+
+const moviesListEl = document.querySelector(".movies");
+const spinnerEl = document.querySelector(".loading-spinner");
+const searchFormEl = document.querySelector(".search-form");
+const searchInputEl = searchFormEl.querySelector(".search-input");
+const searchIcon = document.querySelector(".search__icon");
+const filterSelectEl = document.getElementById("filter");
 let moviesData = {};
-let movies;
-let currentFilter = 'DEFAULT';
-let movies__loading = document.querySelector('.movies__loading')
-let searchIcon = document.querySelector('.search__icon');
-let spinnerEl = document.querySelector('.loading-spinner')
-
-// display:none wasn't working in CSS
-spinnerEl.style.display = 'none';
-
-
+hideSpinner();
 
 // Search API function
+async function fetchMovies(searchTerm) {
+  const response = await fetch(
+    `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchTerm}`
+  );
+  return await response.json();
+  }
+
+// Loads the movies and renders them
 async function searchMovies(searchTerm) {
-  const movies = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchTerm}`);
-  moviesData = await movies.json();
-  spinnerEl.style.display = 'block';
+  showSpinner();
+  moviesData = await fetchMovies(searchTerm);
   await timeout(1000);
-  spinnerEl.remove();
-  moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
-  document.getElementById('filter').selectedIndex = 0;
+  hideSpinner();
+  renderMovies();
+  document.getElementById("filter").selectedIndex = 0;
 }
 
-// Filters by year and resets the drop-down to resort easily
+// pushes movie list to html
+function renderMovies() {
+  if (moviesData.Search) {
+    moviesListEl.innerHTML = moviesData.Search.map((movie) =>
+      movieHTML(movie)
+    ).join("");
+  }
+}
+
+// Filters by year and resets the drop-down to re-sort easily
 async function sortMovies(filter) {
-  if (!moviesData) {
-    moviesData = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchTerm}`);
+  if (!moviesData.Search) return;
+
+  if (filter === "OLDEST") {
+    moviesData.Search.sort(
+      (a, b) =>
+        parseInt(a.Year.substring(0, 4)) - parseInt(b.Year.substring(0, 4))
+    );
+    moviesListEl.innerHTML = moviesData.Search.map((movie) =>
+      movieHTML(movie)
+    ).join("");
+  } else if (filter === "NEWEST") {
+    moviesData.Search.sort(
+      (a, b) =>
+        parseInt(b.Year.substring(0, 4)) - parseInt(a.Year.substring(0, 4))
+    );
+    moviesListEl.innerHTML = moviesData.Search.map((movie) =>
+      movieHTML(movie)
+    ).join("");
   }
 
-  if (filter === 'OLDEST') {
-    moviesData.Search.sort((a, b) => parseInt(a.Year.substring(0, 4)) - parseInt(b.Year.substring(0, 4)));
-    moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
-  } else if (filter === 'NEWEST') {
-    moviesData.Search.sort((a, b) => parseInt(b.Year.substring(0, 4)) - parseInt(a.Year.substring(0, 4)));
-    moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
-  }
-    else if (filter === 'DEFAULT') {
-    moviesListEl.innerHTML = moviesData.Search.map(movie => movieHTML(movie)).join('');
-  }
+  renderMovies();
 }
 
-// Add event listener to submit input
-const searchFormEl = document.querySelector('.search-form');
-const searchInputEl = searchFormEl.querySelector('.search-input');
-searchFormEl.addEventListener('submit', (event) => {
+searchFormEl.addEventListener("submit", handleSearchFormSubmit);
+searchIcon.addEventListener("click", handleSearchIconClick);
+filterSelectEl.addEventListener("change", handleFilterChange);
+
+async function handleSearchFormSubmit(event) {
   event.preventDefault();
   const searchTerm = searchInputEl.value;
-  searchMovies(searchTerm);
-});
+  await searchMovies(searchTerm);
+}
 
-// Add event listener to search icon button
-searchIcon.addEventListener('click', () => {
-  const searchTerm = document.querySelector('.search-input').value;
-  searchMovies(searchTerm);
-});
+async function handleSearchIconClick() {
+  const searchTerm = searchInputEl.value;
+  await searchMovies(searchTerm);
+}
 
 // Selects filter type
-function filter(event) {
+function handleFilterChange(event) {
   sortMovies(event.target.value);
 }
 
-// defines timeout
+// Shows loading spinner
+function showSpinner() {
+  spinnerEl.style.display = "block";
+}
+
+// Hides loading spinner
+function hideSpinner() {
+  spinnerEl.style.display = "none";
+}
+
+// Defines timeout
 function timeout(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 // Opens and closes the hamburger menu
 function openMenu() {
-  document.body.classList += "menu--open"
+  document.body.classList += "menu--open";
 }
 
 function closeMenu() {
-  document.body.classList.remove('menu--open')
+  document.body.classList.remove("menu--open");
 }
 
 // Returns data to inside the HTML

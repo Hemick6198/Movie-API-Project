@@ -281,6 +281,7 @@ MOVIES
 
 #filter {
     border: none;
+    outline: none;
     font-size: 16px;
     line-height: 1.5;
 }

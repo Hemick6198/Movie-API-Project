@@ -20,9 +20,9 @@
                 <h3 class="company__name--logo">ovify</h3> 
               </a>
                 <ul class="nav__links">
-                    <li><a href="" class="nav__link">Home</a></li>
-                    <li><a href="" class="nav__link">Popular List</a></li>
-                    <li><a href="" class="nav__link">Favorites</a></li>
+                    <li class="nav__link">Home</a></li>
+                    <li class="nav__link">Popular List</a></li>
+                    <li class="nav__link">Favorites</a></li>
                     <li><button href="" class="nav__link nav__link--sign-up">Sign Up</button></li>
                     <li><button href="" class="nav__link nav__link--log-in">Log In</button></li>
                 </ul>
@@ -62,24 +62,22 @@
                       <img src="./Assets/undraw_horror_movie_3988.svg" alt="" class="party__img">
                     </figure>
                 </div>
-                <form class="search-form">
+                <form class="search-form" onsubmit="searchMovies(searchTerm)">
                   <input type="text" class="search-input" placeholder="Search for Movies!">
-                  <button class="fa-solid fa-magnifying-glass search__icon">
+                  <button class="fa-solid fa-magnifying-glass search__icon" onclick="searchMovies(searchTerm)">
                   </button>
                 </form>
               </div>
         </header>
     </section>
-
-    <main id="movies__main">
-      <section>
+    <section id="movies__main">
         <div class="container">
           <div class="row">
             <div class="movies__header">
               <h1 class="movies__header--title">
                 Results:
               </h1>
-              <select id="filter" onchange="filter(event)">
+              <select id="filter" onchange="handleFilterChange(event)">
                 <option class="sort__text" value="DEFAULT" disabled selected>Sort</option>
                 <option class="sort__text" value="OLDEST" >Oldest</option>
                 <option class="sort__text" value="NEWEST" >Newest</option>
@@ -88,8 +86,7 @@
             <div class="movies movies__loading">
               <i class="loading-spinner fa-solid fa-spinner fa-spin-pulse"></i>
             </div>
-      </section>
-
+          </section>
       <footer>
         <div class="container">
 
@@ -98,7 +95,6 @@
           </div>
         </div>
       </footer>
-    </main>
-
+    
 </body>
 </html>
