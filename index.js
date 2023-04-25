@@ -7,6 +7,7 @@ const searchFormEl = document.querySelector(".search-form");
 const searchInputEl = searchFormEl.querySelector(".search-input");
 const searchIcon = document.querySelector(".search__icon");
 const filterSelectEl = document.getElementById("filter");
+const searchTerm = searchInputEl.value;
 let moviesData = {};
 hideSpinner();
 
@@ -16,7 +17,7 @@ async function fetchMovies(searchTerm) {
     `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchTerm}`
   );
   return await response.json();
-  }
+}
 
 // Loads the movies and renders them
 async function searchMovies(searchTerm) {
@@ -62,17 +63,20 @@ async function sortMovies(filter) {
   renderMovies();
 }
 
+// Declares even listener functions
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
 searchIcon.addEventListener("click", handleSearchIconClick);
 filterSelectEl.addEventListener("change", handleFilterChange);
 
+// Handles form submit
 async function handleSearchFormSubmit(event) {
   event.preventDefault();
   const searchTerm = searchInputEl.value;
   await searchMovies(searchTerm);
 }
 
-async function handleSearchIconClick() {
+// Handles search icon
+async function handleSearchIconClick(event) {
   const searchTerm = searchInputEl.value;
   await searchMovies(searchTerm);
 }
@@ -97,11 +101,12 @@ function timeout(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Opens and closes the hamburger menu
+// Opens the hamburger menu
 function openMenu() {
   document.body.classList += "menu--open";
 }
 
+// Closes the hamburger menu
 function closeMenu() {
   document.body.classList.remove("menu--open");
 }
